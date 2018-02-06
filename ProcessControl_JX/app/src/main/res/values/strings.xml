@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">ProcessControl_JX</string>
+    <string name="tab_dck">待查勘</string>
+    <string name="tab_yck">已查勘</string>
 </resources>
