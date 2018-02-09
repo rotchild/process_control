@@ -3,6 +3,7 @@ package com.project.cx.processcontrol_jx.ui.fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,11 +11,14 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 
 import com.project.cx.processcontrol_jx.R;
+import com.project.cx.processcontrol_jx.base.BaseAdapter;
+import com.project.cx.processcontrol_jx.base.ViewEventListener;
 import com.project.cx.processcontrol_jx.presenter.PBaseFragmentImp;
 import com.project.cx.processcontrol_jx.widget.MultiStateView;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import butterknife.BindView;
@@ -24,7 +28,7 @@ import butterknife.ButterKnife;
  * Created by Administrator on 2018/2/6 0006.
  */
 
-public abstract class BaseFragment extends Fragment implements IBaseFragment{
+public abstract class BaseFragment<T> extends Fragment implements IBaseFragment<T>{
     @BindView(R.id.multi_state_view)
     MultiStateView multiStateView;
     @BindView(R.id.refreshlayout)
@@ -34,6 +38,8 @@ public abstract class BaseFragment extends Fragment implements IBaseFragment{
     @BindView(R.id.progressbar)
     ProgressBar progressBar;
     PBaseFragmentImp pBaseFragmentImp;
+
+    protected BaseAdapter<T> mAdapter;
 
     @Nullable
     @Override
@@ -66,11 +72,24 @@ public abstract class BaseFragment extends Fragment implements IBaseFragment{
     }
 
     @Override
-    public void onFinishRequest() {
+    public void onFinishRequest(List<T> items) {
         progressBar.setVisibility(View.GONE);
+        if(items!=null && !items.isEmpty()){
+            mAdapter.setItems(items);
+        }
     }
 
     private void initializeViews(Bundle savedInstanceState) {
+        mAdapter=getAdapter();
+        mAdapter.setViewEventListener(new ViewEventListener<T>() {
+            @Override
+            public void onViewEvent(int actionId, T item, int position, View view) {
+                onItemClick(actionId, item);
+            }
+        });
+
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        mRecyclerView.setAdapter(mAdapter);
     }
 
     private void initData() {
@@ -80,6 +99,8 @@ public abstract class BaseFragment extends Fragment implements IBaseFragment{
     @Override
     public void onStart() {
         super.onStart();
-
     }
+
+    protected abstract BaseAdapter<T> getAdapter();
+    protected void onItemClick(int actionId, T item){};
 }
