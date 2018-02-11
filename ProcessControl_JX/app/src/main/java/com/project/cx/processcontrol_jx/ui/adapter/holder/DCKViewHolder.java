@@ -20,8 +20,15 @@ import static com.project.cx.processcontrol_jx.util.Constants.ClickType.CLICK_TY
 
 public class DCKViewHolder extends BaseViewHolder<TaskCK>{
     View mView;
+
     @BindView(R.id.item_dck)
     View item_dck;
+
+    @BindView(R.id.dck_caseNo)
+    TextView dck_caseNo;
+
+    @BindView(R.id.dck_licenseno)
+    TextView licenseno;
 
     @BindView(R.id.dck_caseTime)
     TextView caseTime;
@@ -43,6 +50,8 @@ public class DCKViewHolder extends BaseViewHolder<TaskCK>{
     }
 
     public void bind(TaskCK taskCK){
+        dck_caseNo.setText(taskCK.getCaseNo());
+        licenseno.setText(taskCK.getLicenseno());
         caseTime.setText(taskCK.getCaseTime());
         hurt_state_icon.setImageDrawable(ContextCompat.getDrawable(mView.getContext(),R.drawable.red_medical));
         dck_outNumber.setText(taskCK.getOutNumber());

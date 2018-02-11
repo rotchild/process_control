@@ -53,7 +53,7 @@ public abstract class BaseFragment<T> extends Fragment implements IBaseFragment<
         initData();
         initializeViews(savedInstanceState);
         Map<String,String> params=new HashMap<String, String>();
-        params.put("token","02174f799411ace08b36776f2b579aaf");
+        params.put("token","49bb7e8f796691d6865c4c31cc96533c");
         params.put("frontrole","12");
         params.put("type","dck");
         params.put("lian_state","");

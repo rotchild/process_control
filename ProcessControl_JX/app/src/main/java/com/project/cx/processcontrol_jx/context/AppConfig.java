@@ -15,5 +15,5 @@ public class AppConfig {
      */
     public static final int READ_TIMEOUT_MILLIS = 20 * 1000; // 20s
 
-    public static final String SERVER_URL = "http://192.168.1.13:7091/";
+    public static final String SERVER_URL = "http://116.196.81.196:7091/";
 }
