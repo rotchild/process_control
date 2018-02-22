@@ -5,4 +5,6 @@ package com.project.cx.processcontrol_jx.network.service;
  */
 
 public interface AccountService {
+    //@POST("api/AuthSystem/Loginin")
+
 }

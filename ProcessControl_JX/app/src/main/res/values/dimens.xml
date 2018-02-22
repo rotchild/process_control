@@ -13,4 +13,23 @@
     <dimen name="hdetail_button">32dp</dimen>
     <dimen name="text_width">1dp</dimen>
     <dimen name="book_list_margin">3dp</dimen>
+
+
+    <dimen name="topHeight_size">50dp</dimen>
+    <dimen name="bottomHeight_size">60dp</dimen>
+    <dimen name="login_size">14dp</dimen>
+    <dimen name="edtHeight_size">24dp</dimen>
+    <dimen name="refreshbar_height">62dp</dimen>
+    <dimen name="updatebar_padding">10.0dp</dimen>
+    <dimen name="block_radous">3dip</dimen>
+    <dimen name="updatebar_height">62.0dip</dimen>
+    <dimen name="default_padding">3.0dip</dimen>
+    <dimen name="btnw_small">60dp</dimen>
+    <dimen name="default_large_padding">10.0dp</dimen>
+
+    <dimen name="default_ico_size">24dp</dimen>
+    <dimen name="largeh_ico_size">80dp</dimen>
+    <dimen name="largew_ico_size">40dp</dimen>
+    <dimen name="camera_ico_middle">30dp</dimen>
+
 </resources>
