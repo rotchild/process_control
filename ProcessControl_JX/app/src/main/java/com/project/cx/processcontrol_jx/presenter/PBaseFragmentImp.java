@@ -25,7 +25,7 @@ public class PBaseFragmentImp implements PBaseFragment {
     }
 
     private void initData() {
-        mRestApiClient=new RestApiClient();
+        mRestApiClient=RestApiClient.getInstance();
     }
 
     @Override

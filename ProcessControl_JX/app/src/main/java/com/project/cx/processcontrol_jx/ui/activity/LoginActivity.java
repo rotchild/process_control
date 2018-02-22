@@ -60,11 +60,12 @@ public class LoginActivity extends AppCompatActivity implements ILogin{
     }
 
     @Override
-    public void onLoginFail() {
+    public void onLoginFail(String errMsg) {
         login.setClickable(true);
         username.setEnabled(true);
         password.setEnabled(true);
         setProgressBar(View.GONE);
+        Toast.makeText(this,errMsg,Toast.LENGTH_SHORT).show();
     }
 
     @Override

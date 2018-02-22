@@ -48,12 +48,19 @@ public class RestApiClient {
     private static File httpCacheDirectory=new File(MyApplication.getContext().getCacheDir(),"restapi");
     private static int cachesize=10*1024*1024;//10MiB
     private static Cache cache=new Cache(httpCacheDirectory,cachesize);
+    private static RestApiClient mRestApiClient;
     //private Context mContext;
     private Retrofit mRetrofit;
-    public RestApiClient(){}
+    private RestApiClient(){}
 /*    public RestApiClient(Context context) {
         mContext=context;
     }*/
+    public static RestApiClient getInstance(){
+        if(mRestApiClient==null){
+            mRestApiClient=new RestApiClient();
+        }
+        return mRestApiClient;
+    }
     private OkHttpClient newRetrofitClient(){
         OkHttpClient.Builder builder=new OkHttpClient.Builder();
         builder.connectTimeout(AppConfig.CONNECT_TIMEOUT_MILLIS, TimeUnit.MILLISECONDS);

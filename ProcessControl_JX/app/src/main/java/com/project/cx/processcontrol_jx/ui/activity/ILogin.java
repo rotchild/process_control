@@ -6,7 +6,7 @@ package com.project.cx.processcontrol_jx.ui.activity;
 
 public interface ILogin {
     void onLoginSuccess();
-    void onLoginFail();
+    void onLoginFail(String errMsg);
     void onInvalidInput();
     void onStartRequest();
     void setProgressBar(int visibility);
