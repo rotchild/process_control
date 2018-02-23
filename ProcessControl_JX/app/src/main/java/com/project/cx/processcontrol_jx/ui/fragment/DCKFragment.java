@@ -3,6 +3,9 @@ package com.project.cx.processcontrol_jx.ui.fragment;
 import com.project.cx.processcontrol_jx.base.BaseAdapter;
 import com.project.cx.processcontrol_jx.model.bean.TaskCK;
 import com.project.cx.processcontrol_jx.ui.adapter.DCKAdapter;
+import com.project.cx.processcontrol_jx.util.ParamManager;
+
+import java.util.Map;
 
 import static com.project.cx.processcontrol_jx.util.Constants.ClickType.CLICK_TYPE_DCK_CLICKED;
 
@@ -23,5 +26,12 @@ public class DCKFragment extends BaseFragment<TaskCK> {
             case CLICK_TYPE_DCK_CLICKED:
                 break;
         }
+    }
+
+    @Override
+    protected Map<String, String> getQueryParams() {
+          Map<String,String> params= ParamManager.getInstance().getCKParam("dck","","",
+                "","",ParamManager.currentIndex,10);
+        return params;
     }
 }

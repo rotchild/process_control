@@ -38,6 +38,7 @@ public class PBaseFragmentImp implements PBaseFragment {
                     public void onResponse(TaskResponse<TaskCK> response) {
                         super.onResponse(response);
                         if(response.success.equals("true")){
+
                             mBaseFragment.onFinishRequest(response.data.dataList);
                         }else if(response.success.equals("false")){
 
@@ -47,6 +48,7 @@ public class PBaseFragmentImp implements PBaseFragment {
                     @Override
                     public void onFailure(String errMsg) {
                         super.onFailure(errMsg);
+                        mBaseFragment.onRequestFail(errMsg);
                     }
                 });
     }

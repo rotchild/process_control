@@ -14,6 +14,7 @@ import com.ogaclejapan.smarttablayout.SmartTabLayout;
 import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItemAdapter;
 import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItems;
 import com.project.cx.processcontrol_jx.ui.fragment.DCKFragment;
+import com.project.cx.processcontrol_jx.ui.fragment.YCKFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -36,8 +37,8 @@ public class MainActivity extends AppCompatActivity {
         final int[] tabicons={R.drawable.tab_ic_dck,R.drawable.tab_ic_yck};
         final int[] tabTitles={R.string.tab_dck,R.string.tab_yck};
         FragmentPagerItems pages=FragmentPagerItems.with(this)
-                .add("dck", DCKFragment.class)
-                .add("yck",DCKFragment.class)
+                .add("dck",DCKFragment.class)
+                .add("yck",YCKFragment.class)
                 .create();
         FragmentPagerItemAdapter adapter=new FragmentPagerItemAdapter(
                 getSupportFragmentManager(),pages);

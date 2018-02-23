@@ -9,4 +9,5 @@ import java.util.List;
 public interface IBaseFragment<T> {
     void onStartRequest();
     void onFinishRequest(List<T> items);
+    void onRequestFail(String errMsg);
 }

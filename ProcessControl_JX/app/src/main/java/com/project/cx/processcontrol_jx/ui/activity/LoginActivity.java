@@ -16,6 +16,7 @@ import com.project.cx.processcontrol_jx.R;
 import com.project.cx.processcontrol_jx.presenter.PLogin;
 import com.project.cx.processcontrol_jx.presenter.PLoginImp;
 import com.project.cx.processcontrol_jx.util.MD5;
+import com.project.cx.processcontrol_jx.util.UserManager;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -43,6 +44,11 @@ public class LoginActivity extends AppCompatActivity implements ILogin{
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
         mLoginPresenter=new PLoginImp(this);
+        initData();
+    }
+
+    private void initData() {
+        username.setText(UserManager.getInstance().getUserName());
     }
 
     @Override
@@ -56,7 +62,9 @@ public class LoginActivity extends AppCompatActivity implements ILogin{
         username.setFocusable(true);
         password.setFocusable(true);
         setProgressBar(View.GONE);
+        UserManager.getInstance().setIsLogin(true);
         startActivity(new Intent(this, MainActivity.class));
+        this.finish();
     }
 
     @Override

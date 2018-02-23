@@ -6,11 +6,11 @@ import com.project.cx.processcontrol_jx.model.bean.LoginResponse;
 import com.project.cx.processcontrol_jx.network.RequestCallback;
 import com.project.cx.processcontrol_jx.network.RestApiClient;
 import com.project.cx.processcontrol_jx.ui.activity.ILogin;
+import com.project.cx.processcontrol_jx.util.UserManager;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import rx.Scheduler;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
@@ -47,6 +47,18 @@ public class PLoginImp implements PLogin {
                     @Override
                     public void onResponse(LoginResponse response) {
                         if(response.success.equals("true")){
+                            //保存用户登录信息
+                            if(response.data!=null){
+                                String userid=response.data.userid;
+                                String username=response.data.username;
+                                String token=response.data.token;
+                                String frontrole=response.data.frontrole;
+                                String realname=response.data.realname;
+                                String mobile=response.data.mobile;
+                                String jobNo=response.data.jobNo;
+                                UserManager.getInstance().saveUserInfo(userid,username,token,frontrole,
+                                        realname,mobile,jobNo);
+                            }
                             mLogin.onLoginSuccess();
                         }else{
                             if(response.err!=null){

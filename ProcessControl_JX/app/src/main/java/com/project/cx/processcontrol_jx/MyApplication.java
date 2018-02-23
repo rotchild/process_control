@@ -1,6 +1,7 @@
 package com.project.cx.processcontrol_jx;
 
 import android.app.Application;
+import android.content.Context;
 
 /**
  * Created by Administrator on 2018/2/20 0020.
@@ -8,7 +9,10 @@ import android.app.Application;
 
 public class MyApplication extends Application {
     private static MyApplication myApplication;
-    public static Application getContext(){
+    public static Context getContext(){
+        return myApplication;
+    }
+    public static Application getApplication(){
         return myApplication;
     }
 

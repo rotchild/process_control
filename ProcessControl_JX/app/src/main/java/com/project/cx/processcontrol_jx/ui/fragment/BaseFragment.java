@@ -5,19 +5,22 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.project.cx.processcontrol_jx.R;
 import com.project.cx.processcontrol_jx.base.BaseAdapter;
 import com.project.cx.processcontrol_jx.base.ViewEventListener;
 import com.project.cx.processcontrol_jx.presenter.PBaseFragmentImp;
+import com.project.cx.processcontrol_jx.util.ParamManager;
 import com.project.cx.processcontrol_jx.widget.MultiStateView;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -52,18 +55,16 @@ public abstract class BaseFragment<T> extends Fragment implements IBaseFragment<
         ButterKnife.bind(this,view);
         initData();
         initializeViews(savedInstanceState);
-        Map<String,String> params=new HashMap<String, String>();
-        params.put("token","49bb7e8f796691d6865c4c31cc96533c");
-        params.put("frontrole","12");
-        params.put("type","dck");
-        params.put("lian_state","");
-        params.put("riskstate","");
-        params.put("risklevel","");
-        params.put("keyword","");
-        params.put("start","0");
-        params.put("limit","10");
+
+       /* Map<String,String> params=ParamManager.getInstance().getCKParam("dck","","",
+                "","",ParamManager.currentIndex,10);*/
+       Map<String,String> params=getQueryParams();
         this.onStartRequest();
-        pBaseFragmentImp.fetchData(params);
+        if(params!=null){
+            pBaseFragmentImp.fetchData(params);
+        }else{
+            Log.e("basefragment","params is null");
+        }
     }
 
     @Override
@@ -74,12 +75,40 @@ public abstract class BaseFragment<T> extends Fragment implements IBaseFragment<
     @Override
     public void onFinishRequest(List<T> items) {
         progressBar.setVisibility(View.GONE);
+        if(mRefreshLayout.isLoading()){
+            mRefreshLayout.finishLoadMore();
+        }
         if(items!=null && !items.isEmpty()){
-            mAdapter.setItems(items);
+            //mAdapter.setItems(items);
+            ParamManager.currentIndex=ParamManager.currentIndex+items.size();
+            mAdapter.addItems(items);
+        }else if(items!=null &&items.isEmpty()){
+            Toast.makeText(getContext(),"没有更多数据了",Toast.LENGTH_SHORT).show();
         }
     }
 
+    @Override
+    public void onRequestFail(String errMsg) {
+        if(progressBar.getVisibility()==View.VISIBLE){
+            progressBar.setVisibility(View.GONE);
+        }
+        if(mRefreshLayout.isLoading()){
+            mRefreshLayout.finishLoadMore();
+        }
+        Toast.makeText(getContext(),errMsg,Toast.LENGTH_SHORT).show();
+    }
+
     private void initializeViews(Bundle savedInstanceState) {
+        mRefreshLayout.setOnLoadMoreListener(new OnLoadMoreListener() {
+            @Override
+            public void onLoadMore(RefreshLayout refreshLayout) {
+
+                Map<String,String> params=ParamManager.getInstance().getCKParam("dck","","",
+                        "","",ParamManager.currentIndex,10);
+                pBaseFragmentImp.fetchData(params);
+            }
+        });
+
         mAdapter=getAdapter();
         mAdapter.setViewEventListener(new ViewEventListener<T>() {
             @Override
@@ -102,5 +131,6 @@ public abstract class BaseFragment<T> extends Fragment implements IBaseFragment<
     }
 
     protected abstract BaseAdapter<T> getAdapter();
-    protected void onItemClick(int actionId, T item){};
+    protected void onItemClick(int actionId, T item){}
+    protected abstract Map<String,String> getQueryParams();
 }
