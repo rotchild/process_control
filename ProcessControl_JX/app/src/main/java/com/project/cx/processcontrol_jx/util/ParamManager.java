@@ -9,13 +9,23 @@ import java.util.Map;
 
 public class ParamManager {
     private static ParamManager mParamManager;
-    public static int currentIndex=0;
+    public static int dck_currentIndex=0;
+    public static int yck_currentIndex=0;
     private ParamManager(){}
     public static ParamManager getInstance(){
         if(mParamManager==null){
             mParamManager=new ParamManager();
         }
         return mParamManager;
+    }
+
+    //更新当前index
+    public void updateCurrentIndex(String tasktype,int itemSize){
+        if(tasktype.equals("dck")){
+            ParamManager.dck_currentIndex=ParamManager.dck_currentIndex+itemSize;
+        }else if(tasktype.equals("yck")){
+            ParamManager.yck_currentIndex=ParamManager.yck_currentIndex+itemSize;
+        }
     }
 
     /**

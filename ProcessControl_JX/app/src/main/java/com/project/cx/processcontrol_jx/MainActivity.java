@@ -19,7 +19,7 @@ import com.project.cx.processcontrol_jx.ui.fragment.YCKFragment;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements ViewPager.OnPageChangeListener{
     @BindView(R.id.viewpager)
     ViewPager mViewPager;
     @BindView(R.id.viewpager_tab)
@@ -43,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
         FragmentPagerItemAdapter adapter=new FragmentPagerItemAdapter(
                 getSupportFragmentManager(),pages);
         mViewPager.setAdapter(adapter);
+        mViewPager.addOnPageChangeListener(this);
         mViewpagerTab.setCustomTabView(new SmartTabLayout.TabProvider() {
             @Override
             public View createTabView(ViewGroup container, int position, PagerAdapter adapter) {
@@ -55,5 +56,21 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         mViewpagerTab.setViewPager(mViewPager);
+    }
+
+    @Override
+    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+/*        Log.e("mainact","onPageScrolled\n"+"position:"+position+"/positionOffset"+positionOffset
+                +"/positionOffsetPixels"+positionOffsetPixels);*/
+    }
+
+    @Override
+    public void onPageSelected(int position) {
+//        Log.e("mainactP","onPageSelected\n"+"position:"+position);
+    }
+
+    @Override
+    public void onPageScrollStateChanged(int state) {
+//        Log.e("mainact","onPageScrollStateChanged\n"+"state:"+state);
     }
 }

@@ -7,5 +7,5 @@ import java.util.Map;
  */
 
 public interface PBaseFragment {
-    void fetchData(Map<String,String> params);
+    void fetchData(Map<String,String> params,int type);
 }

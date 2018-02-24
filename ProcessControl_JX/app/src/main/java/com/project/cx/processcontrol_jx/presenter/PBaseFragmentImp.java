@@ -1,5 +1,7 @@
 package com.project.cx.processcontrol_jx.presenter;
 
+import android.util.Log;
+
 import com.project.cx.processcontrol_jx.model.bean.TaskCK;
 import com.project.cx.processcontrol_jx.model.bean.TaskResponse;
 import com.project.cx.processcontrol_jx.network.RequestCallback;
@@ -29,7 +31,7 @@ public class PBaseFragmentImp implements PBaseFragment {
     }
 
     @Override
-    public void fetchData(Map<String,String> params) {
+    public void fetchData(Map<String,String> params, final int type) {
         mRestApiClient.businessService().getTaskCK(params)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -38,10 +40,17 @@ public class PBaseFragmentImp implements PBaseFragment {
                     public void onResponse(TaskResponse<TaskCK> response) {
                         super.onResponse(response);
                         if(response.success.equals("true")){
-
-                            mBaseFragment.onFinishRequest(response.data.dataList);
+                            mBaseFragment.onFinishRequest(response.data.dataList,type);
                         }else if(response.success.equals("false")){
-
+                            if(response.err!=null){
+                                if(response.err.message!=null && response.err.message.length()>0){
+                                    mBaseFragment.onRequestFail(response.err.message);
+                                }else{
+                                    Log.d("pbasefragment","message is null or size0");
+                                }
+                            }else{
+                                Log.d("pbasefragment","response.err is null or size0");
+                            }
                         }
                     }
 
