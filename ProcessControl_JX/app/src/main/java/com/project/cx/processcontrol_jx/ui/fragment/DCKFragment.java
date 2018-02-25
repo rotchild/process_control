@@ -53,7 +53,7 @@ public class DCKFragment extends BaseFragment<TaskCK> {
         super.setUserVisibleHint(isVisibleToUser);
         Log.e("dckfragment","setUserVisibleHint\n"+String.valueOf(isVisibleToUser));
         if(isVisibleToUser){
-            super.onRefresh();
+            super.toRefresh();
         }
     }
 

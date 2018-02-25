@@ -56,14 +56,6 @@ public abstract class BaseFragment<T> extends Fragment implements IBaseFragment<
         ButterKnife.bind(this,view);
         initData();
         initializeViews(savedInstanceState);
-
-/*       Map<String,String> params=getQueryParams();
-        this.onStartRequest();
-        if(params!=null){
-            pBaseFragmentImp.fetchData(params,0);
-        }else{
-            Log.e("basefragment","params is null");
-        }*/
     }
 
     @Override
@@ -72,26 +64,13 @@ public abstract class BaseFragment<T> extends Fragment implements IBaseFragment<
     }
 
     @Override
-    public void onFinishRequest(List<T> items,int type) {
+    public void onFinishRequest(List<T> items) {
         progressBar.setVisibility(View.GONE);
         if(mRefreshLayout.isLoading()){
             mRefreshLayout.finishLoadMore();
         }
         //更新当前index
         ParamManager.getInstance().updateCurrentIndex(getTaskType(),items.size());
-        if(type==0){//refresh
-            if(items!=null && !items.isEmpty()){
-                mAdapter.setItems(items);
-            }else if(items!=null &&items.isEmpty()){
-                Toast.makeText(getContext(),"暂无数据",Toast.LENGTH_SHORT).show();
-            }
-        }else if(type==1){//loadmore
-            if(items!=null && !items.isEmpty()){
-                mAdapter.addItems(items);
-            }else if(items!=null &&items.isEmpty()){
-                Toast.makeText(getContext(),"没有更多数据了",Toast.LENGTH_SHORT).show();
-            }
-        }
     }
 
     @Override
@@ -107,11 +86,10 @@ public abstract class BaseFragment<T> extends Fragment implements IBaseFragment<
 
     private void initializeViews(Bundle savedInstanceState) {
         mRefreshLayout.setOnLoadMoreListener(new OnLoadMoreListener() {
-            Map<String, String> params = null;
 
             @Override
             public void onLoadMore(RefreshLayout refreshLayout) {
-                BaseFragment.this.onLoadMore();
+               pBaseFragmentImp.loadMore(getQueryParams(1));//........
             }
         });
 
@@ -150,25 +128,33 @@ public abstract class BaseFragment<T> extends Fragment implements IBaseFragment<
 
 
     @Override
-    public void onRefresh() {
-        Map<String,String> params=getQueryParams(0);
-        if(pBaseFragmentImp==null){
-            pBaseFragmentImp=new PBaseFragmentImp(this);
+    public void onRefreshFinish(List<T> items) {
+        onFinishRequest(items);
+        if(items!=null && !items.isEmpty()){
+            mAdapter.setItems(items);
+        }else if(items!=null &&items.isEmpty()){
+            Toast.makeText(getContext(),"暂无数据",Toast.LENGTH_SHORT).show();
         }
-        pBaseFragmentImp.fetchData(params,0);
     }
 
     @Override
-    public void onLoadMore() {
-        Map<String,String> params=getQueryParams(1);
-        if(pBaseFragmentImp==null){
-            pBaseFragmentImp=new PBaseFragmentImp(this);
+    public void onLoadMoreFinish(List<T> items) {
+        onFinishRequest(items);
+        if(items!=null && !items.isEmpty()){
+            mAdapter.addItems(items);
+        }else if(items!=null &&items.isEmpty()){
+            Toast.makeText(getContext(),"没有更多数据了",Toast.LENGTH_SHORT).show();
         }
-        pBaseFragmentImp.fetchData(params,1);
     }
 
     protected abstract BaseAdapter<T> getAdapter();
     protected void onItemClick(int actionId, T item){}
     protected abstract Map<String,String> getQueryParams(int type);
     protected abstract String getTaskType();
+    protected void toRefresh(){
+        if(pBaseFragmentImp==null){
+            pBaseFragmentImp=new PBaseFragmentImp(this);
+        }
+        pBaseFragmentImp.refresh(getQueryParams(0));//......
+    }
 }

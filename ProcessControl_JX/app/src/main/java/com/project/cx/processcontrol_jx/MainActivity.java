@@ -13,13 +13,14 @@ import android.widget.TextView;
 import com.ogaclejapan.smarttablayout.SmartTabLayout;
 import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItemAdapter;
 import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItems;
+import com.project.cx.processcontrol_jx.base.BaseActivity;
 import com.project.cx.processcontrol_jx.ui.fragment.DCKFragment;
 import com.project.cx.processcontrol_jx.ui.fragment.YCKFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MainActivity extends AppCompatActivity implements ViewPager.OnPageChangeListener{
+public class MainActivity extends BaseActivity implements ViewPager.OnPageChangeListener{
     @BindView(R.id.viewpager)
     ViewPager mViewPager;
     @BindView(R.id.viewpager_tab)
@@ -27,8 +28,12 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
         initView();
+    }
+
+    @Override
+    protected int getLayoutId() {
+        return R.layout.activity_main;
     }
 
     private void initView() {

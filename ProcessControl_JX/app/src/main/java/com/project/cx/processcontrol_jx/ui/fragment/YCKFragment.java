@@ -42,7 +42,7 @@ public class YCKFragment extends BaseFragment<TaskCK> {
         super.setUserVisibleHint(isVisibleToUser);
         Log.e("yckfragment","setUserVisibleHint\n"+String.valueOf(isVisibleToUser));
         if(isVisibleToUser){
-            super.onRefresh();
+            super.toRefresh();
         }
     }
 }

@@ -31,34 +31,66 @@ public class PBaseFragmentImp implements PBaseFragment {
     }
 
     @Override
-    public void fetchData(Map<String,String> params, final int type) {
+    public void fetchData(Map<String,String> params,RequestCallback<TaskResponse<TaskCK>> callback) {
         mRestApiClient.businessService().getTaskCK(params)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new RequestCallback<TaskResponse<TaskCK>>(){
-                    @Override
-                    public void onResponse(TaskResponse<TaskCK> response) {
-                        super.onResponse(response);
-                        if(response.success.equals("true")){
-                            mBaseFragment.onFinishRequest(response.data.dataList,type);
-                        }else if(response.success.equals("false")){
-                            if(response.err!=null){
-                                if(response.err.message!=null && response.err.message.length()>0){
-                                    mBaseFragment.onRequestFail(response.err.message);
-                                }else{
-                                    Log.d("pbasefragment","message is null or size0");
-                                }
-                            }else{
-                                Log.d("pbasefragment","response.err is null or size0");
-                            }
-                        }
-                    }
+                .subscribe(callback);
+    }
 
-                    @Override
-                    public void onFailure(String errMsg) {
-                        super.onFailure(errMsg);
-                        mBaseFragment.onRequestFail(errMsg);
+    @Override
+    public void loadMore(Map<String,String> params) {
+        fetchData(params,new RequestCallback<TaskResponse<TaskCK>>(){
+            @Override
+            public void onResponse(TaskResponse<TaskCK> response) {
+                super.onResponse(response);
+                if(response.success.equals("true")){
+                    mBaseFragment.onLoadMoreFinish(response.data.dataList);
+                }else if(response.success.equals("false")){
+                    if(response.err!=null){
+                        if(response.err.message!=null && response.err.message.length()>0){
+                            mBaseFragment.onRequestFail(response.err.message);
+                        }else{
+                            Log.d("pbasefragment","message is null or size0");
+                        }
+                    }else{
+                        Log.d("pbasefragment","response.err is null or size0");
                     }
-                });
+                }
+            }
+
+            @Override
+            public void onFailure(String errMsg) {
+                super.onFailure(errMsg);
+            }
+        });
+    }
+
+    @Override
+    public void refresh(Map<String,String> params) {
+        fetchData(params,new RequestCallback<TaskResponse<TaskCK>>(){
+            @Override
+            public void onResponse(TaskResponse<TaskCK> response) {
+                super.onResponse(response);
+                if(response.success.equals("true")){
+                    mBaseFragment.onRefreshFinish(response.data.dataList);
+                }else if(response.success.equals("false")){
+                    if(response.err!=null){
+                        if(response.err.message!=null && response.err.message.length()>0){
+                            mBaseFragment.onRequestFail(response.err.message);
+                        }else{
+                            Log.d("pbasefragment","message is null or size0");
+                        }
+                    }else{
+                        Log.d("pbasefragment","response.err is null or size0");
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(String errMsg) {
+                super.onFailure(errMsg);
+            }
+        });
     }
 }

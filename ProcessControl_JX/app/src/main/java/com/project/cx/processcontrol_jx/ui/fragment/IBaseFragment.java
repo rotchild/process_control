@@ -8,8 +8,8 @@ import java.util.List;
 
 public interface IBaseFragment<T> {
     void onStartRequest();
-    void onFinishRequest(List<T> items,int type);//type:0 refresh,1 loadmore
+    void onFinishRequest(List<T> items);//type:0 refresh,1 loadmore
     void onRequestFail(String errMsg);
-    void onRefresh();
-    void onLoadMore();
+    void onRefreshFinish(List<T> items);
+    void onLoadMoreFinish(List<T> items);
 }
