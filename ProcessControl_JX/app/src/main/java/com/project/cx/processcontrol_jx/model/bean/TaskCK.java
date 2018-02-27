@@ -8,7 +8,7 @@ import java.io.Serializable;
  * Created by Administrator on 2018/2/7 0007.
  */
 
-public class TaskCK implements Serializable {
+public class TaskCK extends BaseTask implements Serializable {
     @SerializedName("id")
     String id;
 

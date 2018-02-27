@@ -3,7 +3,6 @@ package com.project.cx.processcontrol_jx;
 import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,10 +38,11 @@ public class MainActivity extends BaseActivity implements ViewPager.OnPageChange
     private void initView() {
         ButterKnife.bind(this);
         final LayoutInflater inflater=LayoutInflater.from(this);
-        final int[] tabicons={R.drawable.tab_ic_dck,R.drawable.tab_ic_yck};
-        final int[] tabTitles={R.string.tab_dck,R.string.tab_yck};
+        final int[] tabicons={R.drawable.tab_ic_dck,R.drawable.tab_ic_yck,R.drawable.tab_ic_dds};
+        final int[] tabTitles={R.string.tab_dck,R.string.tab_yck,R.string.tab_dds};
         FragmentPagerItems pages=FragmentPagerItems.with(this)
                 .add("dck",DCKFragment.class)
+                .add("yck",YCKFragment.class)
                 .add("yck",YCKFragment.class)
                 .create();
         FragmentPagerItemAdapter adapter=new FragmentPagerItemAdapter(

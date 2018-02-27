@@ -7,16 +7,79 @@ import java.io.Serializable;
 /**
  * Created by Administrator on 2018/2/7 0007.
  */
+/*      id
+        caseNo
+        licenseno
+        case_state
+        ticket_state
+        isRead
+        assessorNo
+        investigatorNo
+        case_from
+        caseTime
+        outTime
+        appointTime
+        createtime
+        accept_time
+        finishtime
+        outNumber
+        reporter
+        reporterPhone
+        reporter1
+        reporterPhone1
+        vehicleBrand
+        car_role
+        riskstate
+        risktype
+        assessor_name
 
-public class TaskDS implements Serializable {
+        assessor_mobile
+        assess_address
+        assess_amount
+        risklevel
+        ticket_tag
+        expect_amount
+        reparations
+        lianTime
+        assessTime
+        ticket_amount
+        ticket_name
+        cooperative_name
+        should_ticket_amount
+        should_ticket_garage
+        real_ticket_garage
+        real_ticket_time
+        assess_id
+        county_id
+        AuthorityContent
+        group_id*/
+public class TaskDS extends BaseTask implements Serializable {
     @SerializedName("id")
     String id;
 
     @SerializedName("caseNo")
     String caseNo;
 
+    @SerializedName("licenseno")
+    String licenseno;
+
     @SerializedName("case_state")
     String case_state;
+
+    @SerializedName("ticket_state")
+    String ticket_state;
+
+    @SerializedName("isRead")
+    String isRead;
+
+    @SerializedName("assessorNo")
+    String assessorNo;
+
+    @SerializedName("investigatorNo")
+    String investigatorNo;
+
+    @SerializedName("case_from")
+    String case_from;
 
     @SerializedName("caseTime")
     String caseTime;
@@ -30,6 +93,9 @@ public class TaskDS implements Serializable {
     @SerializedName("createtime")
     String createtime;
 
+    @SerializedName("accept_time")
+    String accept_time;
+
     @SerializedName("finishtime")
     String finishtime;
 
@@ -42,53 +108,38 @@ public class TaskDS implements Serializable {
     @SerializedName("reporterPhone")
     String reporterPhone;
 
-    @SerializedName("licenseno")
-    String licenseno;
-
+    @SerializedName("reporter1")
+    String reporter1;
 
     @SerializedName("vehicleBrand")
     String vehicleBrand;
 
-
-    @SerializedName("thirdlicenseno")
-    String thirdlicenseno;
-
-
-    @SerializedName("investigatorNo")
-    String investigatorNo;
-
-
     @SerializedName("car_role")
     String car_role;
-
 
     @SerializedName("riskstate")
     String riskstate;
 
-
     @SerializedName("risktype")
     String risktype;
 
+    @SerializedName("assessor_name")
+    String assessor_name;
+
+    @SerializedName("assessor_mobile")
+    String assessor_mobile;
+
+    @SerializedName("assess_address")
+    String assess_address;
+
+    @SerializedName("assess_amount")
+    String assess_amount;
 
     @SerializedName("risklevel")
     String risklevel;
 
-
-    @SerializedName("hurt_state")
-    String hurt_state;
-
-
-    @SerializedName("lian_state")
-    String lian_state;
-
-
-    @SerializedName("isRead")
-    String isRead;
-
-
-    @SerializedName("lianTime")
-    String lianTime;
-
+    @SerializedName("ticket_tag")
+    String ticket_tag;
 
     @SerializedName("expect_amount")
     String expect_amount;
@@ -96,9 +147,52 @@ public class TaskDS implements Serializable {
     @SerializedName("reparations")
     String reparations;
 
+    @SerializedName("lianTime")
+    String lianTime;
 
-    @SerializedName("isAppoint")
-    String isAppoint;
+    @SerializedName("assessTime")
+    String assessTime;
+
+    @SerializedName("ticket_amount")
+    String ticket_amount;
+
+    @SerializedName("ticket_name")
+    String ticket_name;
+
+    @SerializedName("cooperative_name")
+    String cooperative_name;
+
+    @SerializedName("should_ticket_amount")
+    String should_ticket_amount;
+
+    @SerializedName("should_ticket_garage")
+    String should_ticket_garage;
+
+    @SerializedName("real_ticket_garage")
+    String real_ticket_garage;
+
+    @SerializedName("real_ticket_time")
+    String real_ticket_time;
+
+    @SerializedName("assess_id")
+    String assess_id;
+
+    @SerializedName("county_id")
+    String county_id;
+
+    @SerializedName("AuthorityContent")
+    String AuthorityContent;
+
+    @SerializedName("group_id")
+    String group_id;
+
+    public String getLicenseno() {
+        return licenseno;
+    }
+
+    public void setLicenseno(String licenseno) {
+        this.licenseno = licenseno;
+    }
 
     public String getId() {
         return id;
@@ -122,6 +216,46 @@ public class TaskDS implements Serializable {
 
     public void setCase_state(String case_state) {
         this.case_state = case_state;
+    }
+
+    public String getTicket_state() {
+        return ticket_state;
+    }
+
+    public void setTicket_state(String ticket_state) {
+        this.ticket_state = ticket_state;
+    }
+
+    public String getIsRead() {
+        return isRead;
+    }
+
+    public void setIsRead(String isRead) {
+        this.isRead = isRead;
+    }
+
+    public String getAssessorNo() {
+        return assessorNo;
+    }
+
+    public void setAssessorNo(String assessorNo) {
+        this.assessorNo = assessorNo;
+    }
+
+    public String getInvestigatorNo() {
+        return investigatorNo;
+    }
+
+    public void setInvestigatorNo(String investigatorNo) {
+        this.investigatorNo = investigatorNo;
+    }
+
+    public String getCase_from() {
+        return case_from;
+    }
+
+    public void setCase_from(String case_from) {
+        this.case_from = case_from;
     }
 
     public String getCaseTime() {
@@ -156,6 +290,14 @@ public class TaskDS implements Serializable {
         this.createtime = createtime;
     }
 
+    public String getAccept_time() {
+        return accept_time;
+    }
+
+    public void setAccept_time(String accept_time) {
+        this.accept_time = accept_time;
+    }
+
     public String getFinishtime() {
         return finishtime;
     }
@@ -188,12 +330,12 @@ public class TaskDS implements Serializable {
         this.reporterPhone = reporterPhone;
     }
 
-    public String getLicenseno() {
-        return licenseno;
+    public String getReporter1() {
+        return reporter1;
     }
 
-    public void setLicenseno(String licenseno) {
-        this.licenseno = licenseno;
+    public void setReporter1(String reporter1) {
+        this.reporter1 = reporter1;
     }
 
     public String getVehicleBrand() {
@@ -202,22 +344,6 @@ public class TaskDS implements Serializable {
 
     public void setVehicleBrand(String vehicleBrand) {
         this.vehicleBrand = vehicleBrand;
-    }
-
-    public String getThirdlicenseno() {
-        return thirdlicenseno;
-    }
-
-    public void setThirdlicenseno(String thirdlicenseno) {
-        this.thirdlicenseno = thirdlicenseno;
-    }
-
-    public String getInvestigatorNo() {
-        return investigatorNo;
-    }
-
-    public void setInvestigatorNo(String investigatorNo) {
-        this.investigatorNo = investigatorNo;
     }
 
     public String getCar_role() {
@@ -244,6 +370,38 @@ public class TaskDS implements Serializable {
         this.risktype = risktype;
     }
 
+    public String getAssessor_name() {
+        return assessor_name;
+    }
+
+    public void setAssessor_name(String assessor_name) {
+        this.assessor_name = assessor_name;
+    }
+
+    public String getAssessor_mobile() {
+        return assessor_mobile;
+    }
+
+    public void setAssessor_mobile(String assessor_mobile) {
+        this.assessor_mobile = assessor_mobile;
+    }
+
+    public String getAssess_address() {
+        return assess_address;
+    }
+
+    public void setAssess_address(String assess_address) {
+        this.assess_address = assess_address;
+    }
+
+    public String getAssess_amount() {
+        return assess_amount;
+    }
+
+    public void setAssess_amount(String assess_amount) {
+        this.assess_amount = assess_amount;
+    }
+
     public String getRisklevel() {
         return risklevel;
     }
@@ -252,36 +410,12 @@ public class TaskDS implements Serializable {
         this.risklevel = risklevel;
     }
 
-    public String getHurt_state() {
-        return hurt_state;
+    public String getTicket_tag() {
+        return ticket_tag;
     }
 
-    public void setHurt_state(String hurt_state) {
-        this.hurt_state = hurt_state;
-    }
-
-    public String getLian_state() {
-        return lian_state;
-    }
-
-    public void setLian_state(String lian_state) {
-        this.lian_state = lian_state;
-    }
-
-    public String getIsRead() {
-        return isRead;
-    }
-
-    public void setIsRead(String isRead) {
-        this.isRead = isRead;
-    }
-
-    public String getLianTime() {
-        return lianTime;
-    }
-
-    public void setLianTime(String lianTime) {
-        this.lianTime = lianTime;
+    public void setTicket_tag(String ticket_tag) {
+        this.ticket_tag = ticket_tag;
     }
 
     public String getExpect_amount() {
@@ -300,12 +434,108 @@ public class TaskDS implements Serializable {
         this.reparations = reparations;
     }
 
-    public String getIsAppoint() {
-        return isAppoint;
+    public String getLianTime() {
+        return lianTime;
     }
 
-    public void setIsAppoint(String isAppoint) {
-        this.isAppoint = isAppoint;
+    public void setLianTime(String lianTime) {
+        this.lianTime = lianTime;
+    }
+
+    public String getAssessTime() {
+        return assessTime;
+    }
+
+    public void setAssessTime(String assessTime) {
+        this.assessTime = assessTime;
+    }
+
+    public String getTicket_amount() {
+        return ticket_amount;
+    }
+
+    public void setTicket_amount(String ticket_amount) {
+        this.ticket_amount = ticket_amount;
+    }
+
+    public String getTicket_name() {
+        return ticket_name;
+    }
+
+    public void setTicket_name(String ticket_name) {
+        this.ticket_name = ticket_name;
+    }
+
+    public String getCooperative_name() {
+        return cooperative_name;
+    }
+
+    public void setCooperative_name(String cooperative_name) {
+        this.cooperative_name = cooperative_name;
+    }
+
+    public String getShould_ticket_amount() {
+        return should_ticket_amount;
+    }
+
+    public void setShould_ticket_amount(String should_ticket_amount) {
+        this.should_ticket_amount = should_ticket_amount;
+    }
+
+    public String getShould_ticket_garage() {
+        return should_ticket_garage;
+    }
+
+    public void setShould_ticket_garage(String should_ticket_garage) {
+        this.should_ticket_garage = should_ticket_garage;
+    }
+
+    public String getReal_ticket_garage() {
+        return real_ticket_garage;
+    }
+
+    public void setReal_ticket_garage(String real_ticket_garage) {
+        this.real_ticket_garage = real_ticket_garage;
+    }
+
+    public String getReal_ticket_time() {
+        return real_ticket_time;
+    }
+
+    public void setReal_ticket_time(String real_ticket_time) {
+        this.real_ticket_time = real_ticket_time;
+    }
+
+    public String getAssess_id() {
+        return assess_id;
+    }
+
+    public void setAssess_id(String assess_id) {
+        this.assess_id = assess_id;
+    }
+
+    public String getCounty_id() {
+        return county_id;
+    }
+
+    public void setCounty_id(String county_id) {
+        this.county_id = county_id;
+    }
+
+    public String getAuthorityContent() {
+        return AuthorityContent;
+    }
+
+    public void setAuthorityContent(String authorityContent) {
+        AuthorityContent = authorityContent;
+    }
+
+    public String getGroup_id() {
+        return group_id;
+    }
+
+    public void setGroup_id(String group_id) {
+        this.group_id = group_id;
     }
 
     public String toString(){

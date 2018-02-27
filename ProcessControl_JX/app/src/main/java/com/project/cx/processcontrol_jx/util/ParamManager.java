@@ -39,7 +39,7 @@ public class ParamManager {
      * @param limit
      * @return
      */
-    public Map<String,String> getCKParam(String tasktype,String lian_state,String riskstate,String risklevel,
+    public Map<String,String> getParam(String tasktype,String lian_state,String riskstate,String risklevel,
                                             String keyword,int startIndex,int limit){
         Map<String,String> params=new HashMap<>();
         params.put("token", UserManager.getInstance().getUserToken());
@@ -52,5 +52,35 @@ public class ParamManager {
         params.put("start",String.valueOf(startIndex));
         params.put("limit",String.valueOf(limit));
         return params;
+    }
+
+    public Map<String, String> getQueryParams(int loadtype,String tasktype) {//refresh always 0,10;
+        Map<String,String> params=null;
+        if(loadtype==0){//refresh
+            params= getParam(tasktype,"","",
+                    "","",0,10);
+        }else if(loadtype==1){//loadmore
+            params= getParam(tasktype,"","",
+                    "","",getCurrentIndexFromType(tasktype),10);
+        }
+        return params;
+    }
+
+    /**
+     * 根据tasktype获得对应index
+     * @param tasktype
+     * @return
+     */
+    public int getCurrentIndexFromType(String tasktype){
+        int currentIndex=0;
+        switch (tasktype){
+            case "dck":
+                currentIndex=dck_currentIndex;
+                break;
+            case "yck":
+                currentIndex=yck_currentIndex;
+                break;
+        }
+        return currentIndex;
     }
 }

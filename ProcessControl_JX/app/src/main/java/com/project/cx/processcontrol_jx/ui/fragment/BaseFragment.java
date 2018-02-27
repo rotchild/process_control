@@ -22,7 +22,6 @@ import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
 
 import java.util.List;
-import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -89,7 +88,7 @@ public abstract class BaseFragment<T> extends Fragment implements IBaseFragment<
 
             @Override
             public void onLoadMore(RefreshLayout refreshLayout) {
-               pBaseFragmentImp.loadMore(getQueryParams(1));//........
+               pBaseFragmentImp.loadMore(ParamManager.getInstance().getQueryParams(1,getTaskType()));
             }
         });
 
@@ -149,12 +148,11 @@ public abstract class BaseFragment<T> extends Fragment implements IBaseFragment<
 
     protected abstract BaseAdapter<T> getAdapter();
     protected void onItemClick(int actionId, T item){}
-    protected abstract Map<String,String> getQueryParams(int type);
     protected abstract String getTaskType();
     protected void toRefresh(){
         if(pBaseFragmentImp==null){
             pBaseFragmentImp=new PBaseFragmentImp(this);
         }
-        pBaseFragmentImp.refresh(getQueryParams(0));//......
+        pBaseFragmentImp.refresh(ParamManager.getInstance().getQueryParams(0,getTaskType()));
     }
 }
